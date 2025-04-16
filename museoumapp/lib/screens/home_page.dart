@@ -51,30 +51,42 @@ class HomePage extends StatelessWidget {
 
               // Categorías
               const Text(
-                'Categorías',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                height: 180,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    _buildCategoryCard(
-                      imagePath: 'assets/ismaelCastillo.jpg',
-                      title: 'Personajes',
-                      onTap: () {},
-                    ),
-                    const SizedBox(width: 12),
-                    _buildCategoryCard(
-                      imagePath: 'assets/Dormi3.jpg',
-                      title: 'Edificios',
-                      onTap: () {},
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 24),
+  'Categorías',
+  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+),
+const SizedBox(height: 12),
+SizedBox(
+  height: 180,
+  child: ListView(
+    scrollDirection: Axis.horizontal,
+    children: [
+      _buildCategoryCard(
+        imagePath: 'assets/ismaelCastillo.jpg',
+        title: 'Personajes',
+        onTap: () {},
+      ),
+      const SizedBox(width: 12),
+      _buildCategoryCard(
+        imagePath: 'assets/Dormi3.jpg',
+        title: 'Edificios',
+        onTap: () {},
+      ),
+      const SizedBox(width: 12),
+      _buildCategoryCard(
+        imagePath: 'assets/Objeto1.jpg',
+        title: 'Objetos',
+        onTap: () {},
+      ),
+      const SizedBox(width: 12),
+      _buildCategoryCard(
+        imagePath: 'assets/historia1.jpg', 
+        title: 'Historia',
+        onTap: () {},
+      ),
+    ],
+  ),
+),
+const SizedBox(height: 24),
 
               // Blog
               Row(
