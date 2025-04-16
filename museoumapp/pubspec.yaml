@@ -63,6 +63,8 @@ flutter:
     - assets/Dormi3.jpg
     - assets/Objeto1.jpg
     - assets/historia1.jpg
+    - assets/legado1.jpg
+    - assets/proyecto1.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

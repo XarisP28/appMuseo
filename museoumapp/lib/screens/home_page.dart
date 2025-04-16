@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   const Icon(Icons.menu, size: 28),
                   const CircleAvatar(
-                    backgroundImage: AssetImage('assets/perfil.jpg'), // Imagen de perfil
+                    backgroundImage: AssetImage('assets/ismaelCastillo.jpg'), // Imagen de perfil
                     radius: 20,
                   ),
                 ],
@@ -97,8 +97,16 @@ const SizedBox(height: 24),
                 ],
               ),
               const SizedBox(height: 12),
-              _buildBlogItem('Legados', 'assets/legado.png'),
-              _buildBlogItem('Proyectos Educativos', 'assets/proyectos.png'),
+              _buildBlogItem(
+              'Legados',
+              'https://i.ibb.co/C3BmpH8g/museo.jpg',
+              'Descubre cómo funcionan los legados en el Museo Universitario',
+            ),
+            _buildBlogItem(
+              'Proyectos Educativos',
+              'https://i.ibb.co/4nd9phdK/museo2.jpg',
+              'Iniciativas que promueven el aprendizaje a través del arte y la cultura.',
+            ),
             ],
           ),
         ),
@@ -150,15 +158,68 @@ const SizedBox(height: 24),
     );
   }
 
-  Widget _buildBlogItem(String title, String imagePath) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        leading: Image.asset(imagePath, width: 50, fit: BoxFit.cover),
-        title: Text(title),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-        onTap: () {},
-      ),
-    );
-  }
+  Widget _buildBlogItem(String title, String imageUrl, String description) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 24.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          height: 220,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+              loadingBuilder: (context, child, progress) {
+                if (progress == null) return child;
+                return Center(child: CircularProgressIndicator());
+              },
+              errorBuilder: (context, error, stackTrace) {
+                return Center(child: Icon(Icons.error, color: Colors.red));
+              },
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            const Icon(Icons.bookmark, color: Colors.indigo, size: 22),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.indigo,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Text(
+          description,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[700],
+            height: 1.4,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+
 }
