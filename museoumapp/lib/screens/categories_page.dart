@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 // 👉 Importa la página de Personajes
 import 'personajes_page.dart';
+import 'edificios_page.dart';
+import 'objetos_page.dart';
+import 'historia_page.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -30,7 +33,10 @@ class CategoriesPage extends StatelessWidget {
             title: 'Edificios',
             imageUrl: 'https://i.ibb.co/zhC4PN4B/6c9d5ddd-b3ab-4c43-a6f9-5c8a8060e30f.jpg',
             onTap: () {
-              // Navegación futura aquí
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EdificiosPage()),
+              );
             },
           ),
           const SizedBox(height: 12),
@@ -38,7 +44,10 @@ class CategoriesPage extends StatelessWidget {
             title: 'Objetos',
             imageUrl: 'https://i.ibb.co/fd73Vr5c/fea46e1f-9629-4053-b201-fdc168665d6b.jpg',
             onTap: () {
-              // Navegación futura aquí
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ObjetosPage()),
+              );
             },
           ),
           const SizedBox(height: 12),
@@ -46,7 +55,10 @@ class CategoriesPage extends StatelessWidget {
             title: 'Historia',
             imageUrl: 'https://i.ibb.co/GvjryrDn/04bff2d7-c7c3-4858-9ed8-45dd0a3c2e0f.jpg',
             onTap: () {
-              // Navegación futura aquí
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HistoriaPage()),
+              );
             },
           ),
         ],
