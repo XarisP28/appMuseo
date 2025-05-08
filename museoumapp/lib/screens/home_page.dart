@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'blog_detail_page.dart';
 import 'categories_page.dart';
 import 'legados_page.dart';
+import 'login.dart';
 import 'proyectosEducativos_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,10 +22,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Icon(Icons.menu, size: 28),
-                  const CircleAvatar(
-                    backgroundImage: AssetImage('assets/ismaelCastillo.jpg'),
-                    radius: 20,
-                  ),
+                  _buildAvatarWithMenu(context),
                 ],
               ),
               const SizedBox(height: 20),
@@ -92,31 +90,71 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children: const [
-    Text('Blog', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-    Text('Ver todos', style: TextStyle(color: Colors.indigo)),
-  ],
-),
-const SizedBox(height: 12),
-_buildBlogItem(
-  'Legados',
-  'https://i.ibb.co/Ng25np1K/7ab1ebe1-2bf4-4c6d-9109-3b7694420a7f.jpg',
-  'Descubre cómo funcionan los legados en el Museo Universitario',
-  context,
-  LegadosPage(), 
-),
-_buildBlogItem(
-  'Proyectos Educativos',
-  'https://i.ibb.co/Sw95jzws/ced85fac-c486-4fcd-b39e-3b8623ce98ae.jpg',
-  'Iniciativas que promueven el aprendizaje a través del arte y la cultura.',
-  context,
-  ProyectosEducativosPage(), 
-),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Blog', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text('Ver todos', style: TextStyle(color: Colors.indigo)),
+                ],
+              ),
+              const SizedBox(height: 12),
+              _buildBlogItem(
+                'Legados',
+                'https://i.ibb.co/Ng25np1K/7ab1ebe1-2bf4-4c6d-9109-3b7694420a7f.jpg',
+                'Descubre cómo funcionan los legados en el Museo Universitario',
+                context,
+                LegadosPage(),
+              ),
+              _buildBlogItem(
+                'Proyectos Educativos',
+                'https://i.ibb.co/Sw95jzws/ced85fac-c486-4fcd-b39e-3b8623ce98ae.jpg',
+                'Iniciativas que promueven el aprendizaje a través del arte y la cultura.',
+                context,
+                ProyectosEducativosPage(),
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildAvatarWithMenu(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _showDropdownMenu(context);
+      },
+      child: CircleAvatar(
+        backgroundImage: const AssetImage('assets/ismaelCastillo.jpg'),
+        radius: 20,
+      ),
+    );
+  }
+
+  void _showDropdownMenu(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          title: const Text('Opciones'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.exit_to_app, color: Colors.indigo),
+                title: const Text('Cerrar sesión'),
+                onTap: () {
+  // Primero, navega a la pantalla de Login
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => LoginPage()),
+  );
+},
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -152,7 +190,6 @@ _buildBlogItem(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       )),
-                  
                 ],
               ),
             )
@@ -163,43 +200,43 @@ _buildBlogItem(
   }
 
   Widget _buildBlogItem(String titulo, String imagen, String descripcion, BuildContext context, Widget destino) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => destino),
-      );
-    },
-    child: Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 6, offset: const Offset(0, 3))
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-            child: Image.network(imagen, height: 160, width: double.infinity, fit: BoxFit.cover),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(titulo, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                Text(descripcion, style: const TextStyle(fontSize: 14, color: Colors.grey)),
-              ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => destino),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 6, offset: const Offset(0, 3))
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: Image.network(imagen, height: 160, width: double.infinity, fit: BoxFit.cover),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(titulo, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Text(descripcion, style: const TextStyle(fontSize: 14, color: Colors.grey)),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 }

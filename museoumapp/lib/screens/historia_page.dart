@@ -13,41 +13,55 @@ class _HistoriaPageState extends State<HistoriaPage> {
       'titulo': 'Ceremonia Docencia',
       'imagen': 'https://i.ibb.co/k2XnsW6f/ceremonia-Docencia.jpg',
       'descripcion':
-          'Reconocimiento a docentes destacados por su labor académica, promoviendo la excelencia educativa en la universidad.'
+          'Reconocimiento a docentes destacados por su labor académica, promoviendo la excelencia educativa en la universidad. El evento tuvo lugar en la Iglesia Universitaria en 2018'
     },
     {
       'titulo': 'Aniversario No. 82 de la Universidad',
       'imagen': 'https://i.ibb.co/qYkjWrsk/aniversario82.jpg',
       'descripcion':
-          'Se celebró el 82 aniversario de la universidad con actividades culturales, conferencias magistrales y entrega de reconocimientos a exalumnos destacados.'
+          'Se celebró el 82 aniversario de la universidad con actividades culturales, conferencias magistrales y entrega de reconocimientos a exalumnos destacados. El evento tuvo lugar en el Auditorio de Música en 2022'
     },
     {
       'titulo': 'Visita autoridades',
       'imagen': 'https://i.ibb.co/GQd49xxL/visita-autoridades.jpg',
       'descripcion':
-          'Directivos estatales y municipales recorrieron las instalaciones para conocer los nuevos laboratorios de investigación inaugurados este año.'
+          'Directivos estatales y municipales recorrieron las instalaciones para conocer los nuevos laboratorios de investigación inaugurados este año. El evento tuvo lugar en la Sala Charles Taylor en 2024'
     },
     {
       'titulo': 'Visita Hope Channel a la Facultad de Comunicación',
       'imagen': 'https://i.ibb.co/1jR8sgy/visita-Hopechanel.jpg',
       'descripcion':
-          'Representantes de Hope Channel visitaron la Facultad de Comunicación para establecer colaboraciones en producción audiovisual y medios educativos.'
+          'Representantes de Hope Channel visitaron la Facultad de Comunicación para establecer colaboraciones en producción audiovisual y medios educativos. El evento tuvo lugar en la Iglesia Universitaria en 2021'
     },
     {
       'titulo': 'Entrega de Beca Regional Centrícola',
       'imagen': 'https://i.ibb.co/1tWcxy0X/beca-Regional.jpg',
       'descripcion':
-          'Se otorgaron 10 becas a estudiantes de alto rendimiento provenientes de municipios aledaños, como parte del programa de apoyo regional.'
+          'Se otorgaron 10 becas a estudiantes de alto rendimiento provenientes de municipios aledaños, como parte del programa de apoyo regional. El evento tuvo lugar en Rectoría en 2017'
     },
     {
       'titulo': 'Firma Convenio con Gobierno NL',
       'imagen': 'https://i.ibb.co/wFygH2K7/firma-Convenio.jpg',
       'descripcion':
-          'Se firmó un acuerdo de colaboración con el Gobierno de Nuevo León para proyectos conjuntos en temas de medio ambiente, salud y desarrollo social.'
+          'Se firmó un acuerdo de colaboración con el Gobierno de Nuevo León para proyectos conjuntos en temas de medio ambiente, salud y desarrollo social. El evento tuvo lugar en El Palacio Principal en 2015'
     }
   ];
 
   String query = '';
+
+  // Función de análisis léxico para extraer lugar y año
+  Map<String, String> extraerLugarYAnio(String descripcion) {
+    final lugarRegex = RegExp(r'en (.*?) en \d{4}');
+    final anioRegex = RegExp(r'en (\d{4})');
+
+    final lugarMatch = lugarRegex.firstMatch(descripcion);
+    final anioMatch = anioRegex.firstMatch(descripcion);
+
+    final lugar = lugarMatch != null ? lugarMatch.group(1)!.trim() : 'Desconocido';
+    final anio = anioMatch != null ? anioMatch.group(1)! : 'Desconocido';
+
+    return {'lugar': lugar, 'anio': anio};
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +103,7 @@ class _HistoriaPageState extends State<HistoriaPage> {
                   var acontecimiento = acontecimientosFiltrados[index];
                   return GestureDetector(
                     onTap: () {
+                      final metadatos = extraerLugarYAnio(acontecimiento['descripcion']!);
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -124,6 +139,9 @@ class _HistoriaPageState extends State<HistoriaPage> {
                                     textAlign: TextAlign.justify,
                                     style: const TextStyle(fontSize: 16),
                                   ),
+                                  const SizedBox(height: 8),
+                                  infoText('Lugar del evento:', metadatos['lugar']!),
+                                  infoText('Año:', metadatos['anio']!),
                                 ],
                               ),
                             ),

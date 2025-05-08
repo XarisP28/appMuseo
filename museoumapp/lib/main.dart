@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'screens/login.dart';
+import 'screens/register_page.dart';
 import 'screens/home_page.dart';
 
 void main() {
@@ -12,11 +14,13 @@ class MuseoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Museo Universitario',
+      debugShowCheckedModeBanner: false, // Para quitar la banda de debug
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
       ),
-      home: HomePage(), 
+      
+      home: const LoginPage(), 
     );
   }
 }
