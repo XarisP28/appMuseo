@@ -33,19 +33,6 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Buscar',
-                  prefixIcon: const Icon(Icons.search),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

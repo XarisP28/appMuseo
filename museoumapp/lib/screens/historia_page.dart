@@ -12,42 +12,36 @@ class _HistoriaPageState extends State<HistoriaPage> {
     {
       'titulo': 'Ceremonia Docencia',
       'imagen': 'https://i.ibb.co/k2XnsW6f/ceremonia-Docencia.jpg',
-      'fecha': '12/09/2024',
       'descripcion':
           'Reconocimiento a docentes destacados por su labor académica, promoviendo la excelencia educativa en la universidad.'
     },
     {
       'titulo': 'Aniversario No. 82 de la Universidad',
       'imagen': 'https://i.ibb.co/qYkjWrsk/aniversario82.jpg',
-      'fecha': '24/05/2024',
       'descripcion':
           'Se celebró el 82 aniversario de la universidad con actividades culturales, conferencias magistrales y entrega de reconocimientos a exalumnos destacados.'
     },
     {
       'titulo': 'Visita autoridades',
       'imagen': 'https://i.ibb.co/GQd49xxL/visita-autoridades.jpg',
-      'fecha': '10/07/2023',
       'descripcion':
           'Directivos estatales y municipales recorrieron las instalaciones para conocer los nuevos laboratorios de investigación inaugurados este año.'
     },
     {
       'titulo': 'Visita Hope Channel a la Facultad de Comunicación',
       'imagen': 'https://i.ibb.co/1jR8sgy/visita-Hopechanel.jpg',
-      'fecha': '03/11/2023',
       'descripcion':
           'Representantes de Hope Channel visitaron la Facultad de Comunicación para establecer colaboraciones en producción audiovisual y medios educativos.'
     },
     {
       'titulo': 'Entrega de Beca Regional Centrícola',
       'imagen': 'https://i.ibb.co/1tWcxy0X/beca-Regional.jpg',
-      'fecha': '18/02/2024',
       'descripcion':
           'Se otorgaron 10 becas a estudiantes de alto rendimiento provenientes de municipios aledaños, como parte del programa de apoyo regional.'
     },
     {
       'titulo': 'Firma Convenio con Gobierno NL',
       'imagen': 'https://i.ibb.co/wFygH2K7/firma-Convenio.jpg',
-      'fecha': '21/03/2024',
       'descripcion':
           'Se firmó un acuerdo de colaboración con el Gobierno de Nuevo León para proyectos conjuntos en temas de medio ambiente, salud y desarrollo social.'
     }
@@ -125,8 +119,6 @@ class _HistoriaPageState extends State<HistoriaPage> {
                                     ),
                                   ),
                                   const SizedBox(height: 12),
-                                  infoText('Fecha:', acontecimiento['fecha']!),
-                                  const SizedBox(height: 8),
                                   Text(
                                     acontecimiento['descripcion']!,
                                     textAlign: TextAlign.justify,
