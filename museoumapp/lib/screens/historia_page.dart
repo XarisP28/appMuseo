@@ -51,14 +51,11 @@ class _HistoriaPageState extends State<HistoriaPage> {
 
   // Función de análisis léxico para extraer lugar y año
   Map<String, String> extraerLugarYAnio(String descripcion) {
-    final lugarRegex = RegExp(r'en (.*?) en \d{4}');
-    final anioRegex = RegExp(r'en (\d{4})');
+    final lugarAnioRegex = RegExp(r'El evento tuvo lugar en (.*?) en (\d{4})');
+    final match = lugarAnioRegex.firstMatch(descripcion);
 
-    final lugarMatch = lugarRegex.firstMatch(descripcion);
-    final anioMatch = anioRegex.firstMatch(descripcion);
-
-    final lugar = lugarMatch != null ? lugarMatch.group(1)!.trim() : 'Desconocido';
-    final anio = anioMatch != null ? anioMatch.group(1)! : 'Desconocido';
+    final lugar = match != null ? match.group(1)!.trim() : 'Desconocido';
+    final anio = match != null ? match.group(2)! : 'Desconocido';
 
     return {'lugar': lugar, 'anio': anio};
   }
@@ -66,7 +63,9 @@ class _HistoriaPageState extends State<HistoriaPage> {
   @override
   Widget build(BuildContext context) {
     var acontecimientosFiltrados = acontecimientos.where((acontecimiento) {
-      return acontecimiento['titulo']!.toLowerCase().contains(query.toLowerCase());
+      return acontecimiento['titulo']!
+          .toLowerCase()
+          .contains(query.toLowerCase());
     }).toList();
 
     return Scaffold(
@@ -81,7 +80,8 @@ class _HistoriaPageState extends State<HistoriaPage> {
               decoration: InputDecoration(
                 hintText: 'Buscar acontecimiento',
                 prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
               onChanged: (value) {
                 setState(() {
@@ -103,13 +103,15 @@ class _HistoriaPageState extends State<HistoriaPage> {
                   var acontecimiento = acontecimientosFiltrados[index];
                   return GestureDetector(
                     onTap: () {
-                      final metadatos = extraerLugarYAnio(acontecimiento['descripcion']!);
+                      final metadatos = extraerLugarYAnio(
+                          acontecimiento['descripcion']!);
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
                             contentPadding: const EdgeInsets.all(16),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
                             content: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -140,7 +142,8 @@ class _HistoriaPageState extends State<HistoriaPage> {
                                     style: const TextStyle(fontSize: 16),
                                   ),
                                   const SizedBox(height: 8),
-                                  infoText('Lugar del evento:', metadatos['lugar']!),
+                                  infoText('Lugar del evento:',
+                                      metadatos['lugar']!),
                                   infoText('Año:', metadatos['anio']!),
                                 ],
                               ),
